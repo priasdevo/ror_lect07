@@ -10,11 +10,14 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <% if session[:bedit].to_i == 1%>
   <div>
     <%= form.label :student_id, style: "display: block" %>
     <%= form.text_field :student_id %>
   </div>
+  <% end%>
+
 
   <div>
     <%= form.label :subject, style: "display: block" %>

@@ -3,11 +3,17 @@ class ScoresController < ApplicationController
 
   # GET /scores or /scores.json
   def index
+    session[:bedit] = 1
     @scores = Score.all
   end
 
   # GET /scores/1 or /scores/1.json
   def show
+    if(session[:bedit].to_i==0)
+      @path = "/students/#{session[:id]}/edit_score"
+    else
+      @path = scores_path
+    end
   end
 
   # GET /scores/new
@@ -17,10 +23,16 @@ class ScoresController < ApplicationController
 
   # GET /scores/1/edit
   def edit
+    if(session[:bedit].to_i==0)
+      @path = "/students/#{session[:id]}/edit_score"
+    else
+      @path = scores_path
+    end
   end
 
   # POST /scores or /scores.json
   def create
+    session[:bedit] = 1
     @score = Score.new(score_params)
 
     respond_to do |format|
@@ -36,6 +48,12 @@ class ScoresController < ApplicationController
 
   # PATCH/PUT /scores/1 or /scores/1.json
   def update
+    if(session[:bedit].to_i==0)
+      @path = "/students/#{session[:id]}/edit_score"
+    else
+      @path = scores_path
+    end
+
     respond_to do |format|
       if @score.update(score_params)
         format.html { redirect_to score_url(@score), notice: "Score was successfully updated." }

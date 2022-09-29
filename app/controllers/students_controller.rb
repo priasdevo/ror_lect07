@@ -58,6 +58,8 @@ class StudentsController < ApplicationController
   end
 
   def edit_score
+    session[:bedit] = 0
+    session[:id] = params[:id]
     @id = params[:id]
     @score = Student.find(params[:id]).Score.all#.Score[0].id
     @av_score = 0
