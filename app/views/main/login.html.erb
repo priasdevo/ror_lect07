@@ -1,0 +1,7 @@
+<%= form_with url: '/main/relay', method: 'post', data: {turbo: false} do |form| %> 
+	<%= form.label :userid, style: "display: block" %>
+    <%= form.text_field :userid %>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.password_field :password %>
+    <%= form.submit text="Login"%>
+<%end%>

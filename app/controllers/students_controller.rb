@@ -3,20 +3,30 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
+    @authen = session[:authen]
     @students = Student.all
   end
 
   # GET /students/1 or /students/1.json
   def show
+      if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
   end
 
   # GET /students/new
   def new
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+    end
     @student = Student.new
   end
 
   # GET /students/1/edit
   def edit
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+    end
   end
 
   # POST /students or /students.json
@@ -58,6 +68,7 @@ class StudentsController < ApplicationController
   end
 
   def edit_score
+    @authen = session[:authen]
     session[:bedit] = 0
     session[:id] = params[:id]
     @id = params[:id]

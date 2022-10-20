@@ -3,12 +3,18 @@ class ScoresController < ApplicationController
 
   # GET /scores or /scores.json
   def index
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     session[:bedit] = 1
     @scores = Score.all
   end
 
   # GET /scores/1 or /scores/1.json
   def show
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     if(session[:bedit].to_i==0)
       @path = "/students/#{session[:id]}/edit_score"
     else
@@ -18,11 +24,17 @@ class ScoresController < ApplicationController
 
   # GET /scores/new
   def new
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     @score = Score.new
   end
 
   # GET /scores/1/edit
   def edit
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     if(session[:bedit].to_i==0)
       @path = "/students/#{session[:id]}/edit_score"
     else
@@ -32,6 +44,9 @@ class ScoresController < ApplicationController
 
   # POST /scores or /scores.json
   def create
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     session[:bedit] = 1
     @score = Score.new(score_params)
 
@@ -48,6 +63,9 @@ class ScoresController < ApplicationController
 
   # PATCH/PUT /scores/1 or /scores/1.json
   def update
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     if(session[:bedit].to_i==0)
       @path = "/students/#{session[:id]}/edit_score"
     else
@@ -67,6 +85,7 @@ class ScoresController < ApplicationController
 
   # DELETE /scores/1 or /scores/1.json
   def destroy
+
     @score.destroy
 
     respond_to do |format|
@@ -76,6 +95,9 @@ class ScoresController < ApplicationController
   end
 
   def relay
+    if(!session[:authen])
+        redirect_to :controller=>'main',:action=>'login'
+      end
     commit = params[:commit]
     indexs = params[:index]
     if(commit == "Edit")

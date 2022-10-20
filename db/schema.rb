@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_062019) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_073413) do
+  create_table "password_digests", force: :cascade do |t|
+    t.boolean "admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "scores", force: :cascade do |t|
     t.integer "student_id", null: false
     t.string "subject"
@@ -26,6 +32,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_062019) do
     t.date "dob"
     t.string "student_no"
     t.integer "class_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "password_digest"
+    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
