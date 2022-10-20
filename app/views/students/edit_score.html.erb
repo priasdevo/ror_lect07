@@ -4,11 +4,14 @@
 	<%= form_with url: '/scores/relay', method: 'post', data: {turbo: false} do |form| %> 
 	<%= "You got #{n.point} which resulted in #{n.grade} in subject of #{n.subject} "%> 
 	<%= form.hidden_field :index,value:n.id%> 
-	<%= form.submit "Edit"%> 
-	<%= form.submit "Delete"%>
-
+	<% if(@authen)%>
+		<%= form.submit "Edit"%> 
+		<%= form.submit "Delete"%>
+	<%end%>
 <%end%> <%end%>
+<% if(@authen)%>
 <%= form_with url: '/scores/relay', method: 'post', data: {turbo: false} do |form| %> 
 	<%= form.hidden_field :index,value:@id%> 
 	<%= form.submit "Add"%> 
+<%end%>
 <%end%>
